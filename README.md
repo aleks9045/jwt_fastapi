@@ -66,24 +66,22 @@ docker-compose up --build
 ### Headers:
 
 ```
-Content_Type: multipart/form-data
+Content_Type: application/json
 ```
 
-### Fields:
+### Fields(Body):
 
 ```
 email - string(required)
 name - string(required)
-full_name - string(required)
 password - string(required)
-photo - string($binary)
 ```
 
 ### Responses:
 
 ```
 400: {"detail": "Пользователь с такой почтой уже существует."}
-400: {"detail": "Произошла неизвестная ошибка."
+500: {"detail": "Произошла неизвестная ошибка."
 201: {"detail": "Пользователь был успешно добавлен."}
 ```
 
@@ -97,7 +95,7 @@ photo - string($binary)
  Content_Type: multipart/form-data
 ```
 
-### Fields:
+### Fields(Body):
 
 ```
  email - string(required)
@@ -124,7 +122,7 @@ photo - string($binary)
 
 ```
  Content_Type: multipart/form-data
- Authorization: "Bearer" "refresh_token"
+ Authorization: "<Bearer>" "refresh_token"
 ```
 
 ### Fields:
@@ -152,7 +150,7 @@ photo - string($binary)
 
 ```
 Content_Type: None
-Authorization: "Bearer" "access_token"
+Authorization: "<Bearer>" "access_token"
 ```
 
 ### Fields:
@@ -169,7 +167,6 @@ Authorization: "Bearer" "access_token"
  403: {"detail": "Не удалось подтвердить учетные данные."}
  404: {"detail": "Пользователь не найден."}
  200: {"name": name,
-       "full_name": full_name,
        "email": email,
        "photo": path_to_photo}
 ```
@@ -182,14 +179,13 @@ Authorization: "Bearer" "access_token"
 
 ```
 Content_Type: application/json
-Authorization: "Bearer" "access_token"
+Authorization: "<Bearer>" "access_token"
 ```
 
 ### Fields:
 
 ```
  name - string(required)
- full_name - string(required)
 ```
 
 ### Responses:
@@ -224,7 +220,7 @@ Authorization: "Bearer" "access_token"
  400: {"detail": "Отсутствует заголовок с токеном."}
  401: {"detail": "Срок действия токена истёк."}
  403: {"detail": "Не удалось подтвердить учетные данные."}
- 200: None
+ 200: {"detail": "Успешно."}
 ```
 
 ##
@@ -250,7 +246,7 @@ Authorization: "Bearer" "access_token"
  400: {"detail": "Отсутствует заголовок с токеном."}
  401: {"detail": "Срок действия токена истёк."}
  403: {"detail": "Не удалось подтвердить учетные данные."}
- 200: None
+ 200: {"detail": "Успешно."}
 ```
 
 ##
@@ -276,8 +272,8 @@ Authorization: "Bearer" "access_token"
  400: {"detail": "Отсутствует заголовок с токеном."}
  401: {"detail": "Срок действия токена истёк."}
  403: {"detail": "Не удалось подтвердить учетные данные."}
- 400: {"detail": "Произошла неизвестная ошибка."}
- 200: None
+ 500: {"detail": "Произошла неизвестная ошибка."}
+ 200: {"detail": "Успешно."}
 ```
 
 ##
@@ -303,6 +299,6 @@ Authorization: "Bearer" "access_token"
  400: {"detail": "Отсутствует заголовок с токеном."}
  401: {"detail": "Срок действия токена истёк."}
  403: {"detail": "Не удалось подтвердить учетные данные."}
- 400: {"detail": "Произошла неизвестная ошибка."}
+ 500: {"detail": "Произошла неизвестная ошибка."}
  200: None
 ```

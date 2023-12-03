@@ -6,7 +6,7 @@ from fastapi.requests import Request
 from jose import jwt
 from passlib.context import CryptContext
 
-from backend.config import SECRET_JWT, SECRET_JWT_REFRESH
+from config import SECRET_JWT, SECRET_JWT_REFRESH
 
 
 class Password:
@@ -61,7 +61,7 @@ class Token:
         encoded_jwt = jwt.encode(to_encode, self.JWT_REFRESH_SECRET_KEY, self.ALGORITHM)
         return encoded_jwt
 
-    def check(self, request: Request, type_: bool) -> dict:
+    async def check(self, request: Request, type_: bool = True) -> dict:
         try:
             try:
                 authorization = request.headers.get("Authorization").split(" ")

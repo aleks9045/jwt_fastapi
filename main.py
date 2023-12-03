@@ -1,9 +1,9 @@
+import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from services.auth.routers import router as auth_router
-import sys
 
 app = FastAPI()
 
@@ -24,3 +24,6 @@ app.add_middleware(
 app.include_router(auth_router)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+if __name__ == "__main__":
+    uvicorn.run(app="main:app", host="0.0.0.0", port=8000, log_level="info")

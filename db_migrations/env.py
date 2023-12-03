@@ -6,14 +6,10 @@ from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-import sys
-sys.path.append("../../../Jwt")
+from config import POSTGRES_USER, PORT, POSTGRES_PASSWORD, HOST, POSTGRES_DB
+from database import Base
+from services.auth.models import UserModel
 
-
-from backend.config import POSTGRES_USER, PORT, POSTGRES_PASSWORD, HOST, POSTGRES_DB
-from backend.database import Base
-from backend.services.auth.models import UserModel
-from backend.services.files.models import FileModel
 
 config = context.config
 

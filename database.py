@@ -10,12 +10,10 @@ from config import POSTGRES_USER, PORT, POSTGRES_PASSWORD, HOST, POSTGRES_DB
 DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{HOST}:{PORT}/{POSTGRES_DB}"
 Base: DeclarativeMeta = declarative_base()
 
-engine = create_async_engine(DATABASE_URL, echo=True)
-async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+engine = create_async_engine(DATABASE_URL)
+async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False, autocommit=False)
 
 
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
     async with async_session() as session:
         yield session
-
-
